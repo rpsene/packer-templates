@@ -5,8 +5,13 @@ def db_url
 end
 
 describe 'elasticsearch installation', sudo: true do
+
+  describe package('elasticsearch') do
+    it { should be_installed }
+  end
+
   before :all do
-    sh('sudo service elasticsearch start')
+    sh('sudo service elasticsearch restart')
     tcpwait('localhost', 9200, 30)
     sh(%(curl -H "Content-Type: application/json" -X PUT "#{db_url}/user/koopa93" -d "{
         \"name\": \"Shy Bowser\"
@@ -19,11 +24,6 @@ describe 'elasticsearch installation', sudo: true do
       }"
     ))
     sleep 8
-  end
-
-
-  describe package('elasticsearch') do
-    it { should be_installed }
   end
 
   describe command(

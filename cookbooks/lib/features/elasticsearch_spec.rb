@@ -12,7 +12,8 @@ describe 'elasticsearch installation', sudo: true do
 
   before :all do
     sh('sudo service elasticsearch restart')
-    tcpwait('localhost', 9200, 30)
+    sleep 5
+#    tcpwait('localhost', 9200, 30)
     sh(%(curl -H "Content-Type: application/json" -X PUT "#{db_url}/user/koopa93" -d "{
         \"name\": \"Shy Bowser\"
       }"

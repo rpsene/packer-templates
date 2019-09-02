@@ -9,7 +9,8 @@ main() {
   export DEBIAN_FRONTEND='noninteractive'
 
   if [[ "${PACKER_BUILDER_TYPE}" != docker ]]; then
-    __disable_ipv6
+  #__disable_ipv6
+    echo
   fi
   if ! [[ "$(uname -m)" =~ ppc64 ]]; then
     __enable_i386
